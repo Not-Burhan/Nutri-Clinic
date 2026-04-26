@@ -1,0 +1,63 @@
+[debug] [2026-04-26T15:09:50.452Z] ----------------------------------------------------------------------
+[debug] [2026-04-26T15:09:50.456Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Burhan\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2026-04-26T15:09:50.457Z] CLI Version:   15.15.0
+[debug] [2026-04-26T15:09:50.457Z] Platform:      win32
+[debug] [2026-04-26T15:09:50.457Z] Node Version:  v24.14.0
+[debug] [2026-04-26T15:09:50.457Z] Time:          Sun Apr 26 2026 20:09:50 GMT+0500 (Pakistan Standard Time)
+[debug] [2026-04-26T15:09:50.457Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Burhan\OneDrive\Desktop\Nutri Clinic WEBAPP\nutriclinic--patient-management-system (2)
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[debug] [2026-04-26T15:09:58.171Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-26T15:09:58.171Z] > authorizing via signed-in user (amjokerop@gmail.com)
+[debug] [2026-04-26T15:09:58.172Z] Checked if tokens are valid: true, expires at: 1777219722371
+[debug] [2026-04-26T15:09:58.172Z] Checked if tokens are valid: true, expires at: 1777219722371
+[debug] [2026-04-26T15:09:58.173Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/nutri-clinic-84424 [none]
+[debug] [2026-04-26T15:10:01.443Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/nutri-clinic-84424 200
+[debug] [2026-04-26T15:10:01.443Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/nutri-clinic-84424 {"projectId":"nutri-clinic-84424","projectNumber":"849234611827","displayName":"Nutri Clinic","name":"projects/nutri-clinic-84424","resources":{"hostingSite":"nutri-clinic-84424","realtimeDatabaseInstance":"nutri-clinic-84424-default-rtdb"},"state":"ACTIVE","etag":"1_0560ce85-4d69-4648-99ab-bf6c5ec49241"}
+[info] i  Using project nutri-clinic-84424 (Nutri Clinic) . 
+[info] 
+=== Hosting Setup
+[debug] [2026-04-26T15:10:14.707Z] Checked if tokens are valid: true, expires at: 1777219722371
+[debug] [2026-04-26T15:10:14.707Z] Checked if tokens are valid: true, expires at: 1777219722371
+[debug] [2026-04-26T15:10:14.707Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/nutri-clinic-84424 [none]
+[debug] [2026-04-26T15:10:16.479Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/nutri-clinic-84424 200
+[debug] [2026-04-26T15:10:16.479Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/nutri-clinic-84424 {"projectId":"nutri-clinic-84424","projectNumber":"849234611827","displayName":"Nutri Clinic","name":"projects/nutri-clinic-84424","resources":{"hostingSite":"nutri-clinic-84424","realtimeDatabaseInstance":"nutri-clinic-84424-default-rtdb"},"state":"ACTIVE","etag":"1_0560ce85-4d69-4648-99ab-bf6c5ec49241"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[info] 
+[info] i  Didn't detect a .git folder. Assuming C:\Users\Burhan\OneDrive\Desktop\Nutri Clinic WEBAPP\nutriclinic--patient-management-system (2) is the project root. 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=906704309&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2026-04-26T15:10:43.379Z] >>> [apiv2][query] POST https://github.com/login/oauth/access_token [none]
+[debug] [2026-04-26T15:10:43.380Z] >>> [apiv2][body] POST https://github.com/login/oauth/access_token [stream]
+[debug] [2026-04-26T15:10:44.104Z] <<< [apiv2][status] POST https://github.com/login/oauth/access_token 200
+[debug] [2026-04-26T15:10:44.104Z] <<< [apiv2][body] POST https://github.com/login/oauth/access_token {"access_token":"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","token_type":"bearer","scope":"read:user,repo"}
+[debug] [2026-04-26T15:10:44.109Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2026-04-26T15:10:44.875Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2026-04-26T15:10:44.875Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"Not-Burhan","id":192768090,"node_id":"U_kgDOC31oWg","avatar_url":"https://avatars.githubusercontent.com/u/192768090?v=4","gravatar_id":"","url":"https://api.github.com/users/Not-Burhan","html_url":"https://github.com/Not-Burhan","followers_url":"https://api.github.com/users/Not-Burhan/followers","following_url":"https://api.github.com/users/Not-Burhan/following{/other_user}","gists_url":"https://api.github.com/users/Not-Burhan/gists{/gist_id}","starred_url":"https://api.github.com/users/Not-Burhan/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/Not-Burhan/subscriptions","organizations_url":"https://api.github.com/users/Not-Burhan/orgs","repos_url":"https://api.github.com/users/Not-Burhan/repos","events_url":"https://api.github.com/users/Not-Burhan/events{/privacy}","received_events_url":"https://api.github.com/users/Not-Burhan/received_events","type":"User","user_view_type":"private","site_admin":false,"name":"Burhan Ahmed","company":null,"blog":"","location":null,"email":"burhan15312@gmail.com","hireable":null,"bio":"Python Developer | Cybersecurity Enthusiast\r\nDesigning and building practical security tools and lab-driven experiments.\r\nFocused on networking, automation, and","twitter_username":null,"notification_email":"burhan15312@gmail.com","public_repos":3,"public_gists":0,"followers":0,"following":0,"created_at":"2024-12-25T06:00:18Z","updated_at":"2026-04-25T10:57:07Z","private_gists":0,"total_private_repos":0,"owned_private_repos":0,"disk_usage":339,"collaborators":0,"two_factor_authentication":false,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] +  Success! Logged into GitHub as Not-Burhan 
+[info] 

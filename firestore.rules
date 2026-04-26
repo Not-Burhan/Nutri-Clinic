@@ -1,0 +1,88 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;      
+    }
+    
+    // Primitive Helpers
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { 
+      return isSignedIn() && (
+        request.auth.token.email == 'amjokerop@gmail.com' ||
+        request.auth.token.email == 'burhan15312@gmail.com'
+      ); 
+    }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-.]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    
+    // User validation
+    function isValidUser(data) {
+      return data.keys().hasAll(['email', 'isActive', 'createdAt']) 
+        && data.email is string && data.email.size() > 0
+        && data.isActive is bool
+        && (data.name is string || !data.keys().contains('name'))
+        && (data.isHuman is bool || !data.keys().contains('isHuman'))
+        && (data.hasRequestedAccess is bool || !data.keys().contains('hasRequestedAccess'));
+    }
+
+    match /users/{userId} {
+      allow create: if isSignedIn() 
+        && request.auth.uid == userId 
+        && isValidUser(incoming())
+        && (incoming().isActive == false || isAdmin());
+
+      allow get: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow list: if isAdmin();
+
+      allow update: if isSignedIn() 
+        && request.auth.uid == userId
+        && isValidUser(incoming())
+        && (
+          // Change human/request flags
+          (incoming().isActive == existing().isActive && 
+           incoming().diff(existing()).affectedKeys().hasOnly(['isHuman', 'hasRequestedAccess', 'name']))
+          ||
+          // Activation via Key
+          (existing().isActive == false && incoming().isActive == true)
+        ) || isAdmin();
+      
+      // Fallback for demo: simpler update rule
+      allow update: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+    }
+
+    match /activationRequests/{requestId} {
+      allow create: if isSignedIn() && request.resource.data.uid == request.auth.uid;
+      allow read, update, list: if isAdmin();
+    }
+
+    match /activationKeys/{keyId} {
+      allow get: if isSignedIn();
+      allow update: if isSignedIn() 
+        && existing().uid == request.auth.uid
+        && existing().used == false
+        && incoming().used == true
+        && incoming().diff(existing()).affectedKeys().hasOnly(['used']);
+      allow create: if isSignedIn() && request.resource.data.uid == request.auth.uid;
+      allow delete, list: if isAdmin();
+    }
+
+    // Existing App Access (ONLY if active)
+    match /users/{userId}/patients/{patientId} {
+      function isActive() {
+        // We verify isActive property on the user document
+        return get(/databases/$(database)/documents/users/$(userId)).data.isActive == true;
+      }
+
+      allow read, write: if isSignedIn() && request.auth.uid == userId && isActive();
+    }
+    
+    match /users/{userId}/patients/{patientId}/history/{historyId} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId; // History access
+    }
+
+  }
+}

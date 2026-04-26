@@ -1,0 +1,128 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user in the system.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "isHuman": { "type": "boolean" },
+        "hasRequestedAccess": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "isActive", "createdAt"]
+    },
+    "ActivationRequest": {
+      "title": "ActivationRequest",
+      "description": "User request for app access.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "status"]
+    },
+    "ActivationKey": {
+      "title": "ActivationKey",
+      "description": "Secure 8-char alphanumeric key.",
+      "type": "object",
+      "properties": {
+        "key": { "type": "string" },
+        "uid": { "type": "string" },
+        "used": { "type": "boolean" },
+        "expiresAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["key", "uid", "used", "expiresAt"]
+    },
+    "Patient": {
+      "title": "Patient",
+      "description": "A patient record created by a dietitian.",
+      "type": "object",
+      "properties": {
+        "patient_id": { "type": "string" },
+        "name": { "type": "string" },
+        "gender": { "type": "string" },
+        "age": { "type": "string" },
+        "marital_status": { "type": "string" },
+        "weight": { "type": "string" },
+        "height": { "type": "string" },
+        "height_ft": { "type": "string" },
+        "height_in": { "type": "string" },
+        "bmi": { "type": "string" },
+        "ibw": { "type": "string" },
+        "waist_circumference": { "type": "string" },
+        "waist_in": { "type": "string" },
+        "activity_level": { "type": "string" },
+        "caloric_requirement": { "type": "string" },
+        "water_requirement": { "type": "string" },
+        "sleeping_hours": { "type": "string" },
+        "socio_economic_status": { "type": "string" },
+        "medical_problem": { "type": "string" },
+        "current_medication": { "type": "string" },
+        "family_medical_history": { "type": "string" },
+        "eat_between_meals": { "type": "string" },
+        "fast_food_frequency": { "type": "string" },
+        "weight_history": { "type": "string" },
+        "processed_food_details": { "type": "string" },
+        "wakeup_time": { "type": "string" },
+        "walk_exercise": { "type": "string" },
+        "sleep_time": { "type": "string" },
+        "snack_time": { "type": "string" },
+        "breakfast_time": { "type": "string" },
+        "lunch_time": { "type": "string" },
+        "dinner_time": { "type": "string" },
+        "physical_exam": { "type": "object" },
+        "gi_function": { "type": "object" },
+        "biochemical_tests": { "type": "array" },
+        "food_items": { "type": "array" },
+        "recommendations": { "type": "object" },
+        "eating_plan": { "type": "array" },
+        "guidelines": { "type": "string" },
+        "date_of_visit": { "type": "string" },
+        "time_of_visit": { "type": "string" },
+        "last_consultation": { "type": "string" },
+        "next_appointment": { "type": "string" },
+        "created_at": { "type": "string" },
+        "updated_at": { "type": "string" },
+        "is_deleted": { "type": "boolean" }
+      },
+      "required": ["patient_id", "name", "created_at"]
+    },
+    "PatientHistory": {
+      "title": "PatientHistory",
+      "description": "Historical snapshot of a patient record.",
+      "type": "object",
+      "properties": {
+        "data": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["data", "created_at"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "The users/dietitians."
+    },
+    "/activationRequests/{requestId}": {
+      "schema": { "$ref": "#/entities/ActivationRequest" },
+      "description": "User requests for activation."
+    },
+    "/activationKeys/{userId}": {
+      "schema": { "$ref": "#/entities/ActivationKey" },
+      "description": "Unique activation keys assigned to users."
+    },
+    "/users/{userId}/patients/{patientId}": {
+      "schema": { "$ref": "#/entities/Patient" },
+      "description": "Patients belonging to a user."
+    },
+    "/users/{userId}/patients/{patientId}/history/{historyId}": {
+      "schema": { "$ref": "#/entities/PatientHistory" },
+      "description": "Historical revisions for a patient."
+    }
+  }
+}
